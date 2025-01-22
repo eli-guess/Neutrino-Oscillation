@@ -1,7 +1,7 @@
 from oscillation import oscillation_probability
 import streamlit as st
 import numpy as np
-import matplotlib.pyplot as plt
+import plotly.graph_objects as go
 
 
 # Streamlit UI
@@ -53,18 +53,20 @@ E = st.slider("Neutrino Energy (GeV)", 0.1, 10.0, 1.0)
 L = st.slider("Distance Traveled (km)", 1, 10000, 500)
 theta12 = st.slider("Mixing Angle $\\theta_{12}$ (degrees)", 0.0, 45.0, 33.0)
 
-# Calculate Probabilities
+# Calculate Probabilities 
 
 L_values = np.linspace(1, 10000, 500)
-P_values_L = np.zeros(len(L_values))
+E_values = np.linspace(0.1, 10.0, 500)
+P_flavor = np.zeros((len(L_values), len(E_values)))
 
-# Generate Probability
+# Generate Probabilities
 
 for i, L_val in enumerate(L_values):
-    P_matrix = oscillation_probability(E, L_val, theta12)
-    P_values_L[i] = P_matrix[flavor_index, (flavor_index + 1) % 2]  # Transition to next flavor
+    for j, E_val in enumerate(E_values):
+        P_matrix = oscillation_probability(E_val, L_val, theta12)
+        P_flavor[i, j] = P_matrix[flavor_index, (flavor_index + 1) % 2]
 
-# Display Probabilitiy
+# Display Probability
 
 P_matrix_at_E_and_L = oscillation_probability(E, L, theta12)
 probability_at_E_and_L = P_matrix_at_E_and_L[flavor_index, (flavor_index + 1) % 2]  # Transition to next flavor
@@ -77,35 +79,45 @@ st.markdown(
     """,
     unsafe_allow_html=True,
 )
+# Generate Probabilities
 
+L_values = np.linspace(1, 10000, 500)
+P_distance = np.zeros(len(L_values))
+
+for i, L_val in enumerate(L_values):
+    P_matrix = oscillation_probability(E, L_val, theta12)
+    P_distance[i] = P_matrix[flavor_index, (flavor_index + 1) % 2]  # To next flavor
 
 # Plot Oscillation and Distance (Fixed Energy)
 
-fig, ax = plt.subplots(figsize=(10, 6))
-ax.plot(L_values, P_values_L, label="Oscillation Probability")
-ax.set_xlabel("Distance (L) [km]")
-ax.set_ylabel("Oscillation Probability")
-ax.set_title(f"Oscillation Probability of {initial_flavor} to {('Muon' if initial_flavor == 'Electron Neutrino' else 'Electron')} Neutrino")
-ax.grid(True)
-ax.legend()
-st.pyplot(fig)
-
+fig_distance = go.Figure()
+fig_distance.add_trace(go.Scatter(x=L_values, y=P_distance, mode='lines', name=f"Oscillation Probability"))
+fig_distance.update_layout(
+    title="Oscillation Probability vs Distance (Fixed Energy)",
+    xaxis_title="Distance (L) [km]",
+    yaxis_title="Oscillation Probability",
+    template="plotly_dark"
+)
 # Generate Probabilities
 
 E_values = np.linspace(0.1, 10.0, 500)
-P_values_E = np.zeros(len(E_values))
+P_energy = np.zeros(len(E_values))
 
 for i, E_val in enumerate(E_values):
     P_matrix = oscillation_probability(E_val, L, theta12)
-    P_values_E[i] = P_matrix[flavor_index, (flavor_index + 1) % 2]  # Transition to next flavor
+    P_energy[i] = P_matrix[flavor_index, (flavor_index + 1) % 2]  # To next flavor
 
-# Plot Probabilities and Energy
+# Plot Oscillation and Energy (Fixed Distance)
+fig_energy = go.Figure()
+fig_energy.add_trace(go.Scatter(x=E_values, y=P_energy, mode='lines', name=f"Oscillation Probability"))
+fig_energy.update_layout(
+    title="Oscillation Probability vs Energy (Fixed Distance)",
+    xaxis_title="Energy (E) [GeV]",
+    yaxis_title="Oscillation Probability",
+    template="plotly_dark"
+)
 
-fig, ax = plt.subplots(figsize=(10, 6))
-ax.plot(E_values, P_values_E, label="Oscillation Probability", color="orange")
-ax.set_xlabel("Energy (E) [GeV]")
-ax.set_ylabel("Oscillation Probability")
-ax.set_title(f"Oscillation Probability of {initial_flavor} to {('Muon' if initial_flavor == 'Electron Neutrino' else 'Electron')} Neutrino")
-ax.grid(True)
-ax.legend()
-st.pyplot(fig)
+# Display Plots
+
+st.plotly_chart(fig_distance, use_container_width=True)
+st.plotly_chart(fig_energy, use_container_width=True)
