@@ -99,7 +99,6 @@ fig_distance = go.Figure()
 fig_distance.add_trace(go.Scatter(x=L_values, y=P_distance, mode='lines', name=f"Oscillation Probability"))
 fig_distance.update_layout(
     title = "Oscillation Probability vs Distance (Fixed Energy)",
-    title_x = 0.25,
     xaxis_title = "Distance (L) [km]",
     yaxis_title = "Oscillation Probability",
     template = "plotly_dark"
@@ -119,25 +118,10 @@ fig_energy = go.Figure()
 fig_energy.add_trace(go.Scatter(x=E_values, y=P_energy, mode='lines', name=f"Oscillation Probability"))
 fig_energy.update_layout(
     title = "Oscillation Probability vs Energy (Fixed Distance)",
-    title_x = 0.275,
     xaxis_title = "Energy (E) [GeV]",
     yaxis_title = "Oscillation Probability",
     template = "plotly_dark"
 )
-
-custom_css = """
-<style>
-/* Hide the Plotly titles on mobile (screens smaller than 600px) */
-@media only screen and (max-width: 600px) {
-    .plotly-graph-div .gtitle {
-        display: none !important;
-    }
-}
-</style>
-"""
-
-# Apply the custom CSS
-st.markdown(custom_css, unsafe_allow_html=True)
 
 # Display Plots
 
