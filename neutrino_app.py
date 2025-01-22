@@ -125,6 +125,20 @@ fig_energy.update_layout(
     template = "plotly_dark"
 )
 
+# Remove Plot Titles on Mobile
+custom_css = """
+<style>
+/* Hide the Plotly titles on mobile (screens smaller than 600px) */
+@media only screen and (max-width: 600px) {
+    .plotly-graph-div .gtitle {
+        display: none !important;
+    }
+}
+</style>
+"""
+
+st.markdown(custom_css, unsafe_allow_html=True)
+
 # Display Plots
 
 st.plotly_chart(fig_distance, use_container_width=True)
