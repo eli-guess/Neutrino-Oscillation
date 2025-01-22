@@ -125,20 +125,6 @@ fig_energy.update_layout(
     template = "plotly_dark"
 )
 
-custom_css = """
-<style>
-/* Adjust title_x for mobile to left-align */
-@media only screen and (max-width: 600px) {
-    .plotly-graph-div .gtitle {
-        text-align: left !important;
-        transform: translateX(0px) !important;
-    }
-}
-</style>
-"""
-
-st.markdown(custom_css, unsafe_allow_html=True)
-
 # Display Plots
 
 st.plotly_chart(fig_distance, use_container_width=True)
