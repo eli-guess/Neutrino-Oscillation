@@ -79,7 +79,7 @@ probability_at_E_and_L = P_matrix_at_E_and_L[flavor_index, (flavor_index + 1) % 
 st.markdown(
     f"""
     <div style="text-align: center; font-size: 24px; font-weight: bold;">
-        Oscillation Probability from {intial_flavor} to {final_flavor}: {probability_at_E_and_L:.4f}
+        Oscillation Probability from {initial_flavor} to {final_flavor}: {probability_at_E_and_L:.4f}
     </div>
     """,
     unsafe_allow_html = True,
