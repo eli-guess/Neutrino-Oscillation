@@ -4,7 +4,7 @@
 
 Try it out: https://neutrino-osc.streamlit.app/
 
-The **Neutrino Oscillation Simulator** is a web-based application built using Python and Streamlit to visualize the phenomenon of neutrino oscillations. Neutrino oscillation is a quantum mechanical process in which neutrinos change their flavor (e.g., from electron neutrino \( \nu_e \) to muon neutrino \( \nu_\mu \)) as they travel. This simulator uses a simplified two-flavor model to demonstrate the relationship between key parameters, such as energy, distance, and oscillation probability.
+The **Neutrino Oscillation Simulator** is a web-based application built using Python and Streamlit to visualize the phenomenon of neutrino oscillations. Neutrino oscillation is a quantum mechanical process in which neutrinos change their flavor (e.g., from electron neutrino to muon neutrino as they travel. This simulator uses a simplified two-flavor model to demonstrate the relationship between key parameters, such as energy, distance, and oscillation probability.
 
 ---
 
