@@ -38,7 +38,7 @@ The **Neutrino Oscillation Simulator** is a web-based application built using Py
 ### Steps
 1. Clone this repository:
    ```bash
-   git clone https://github.com/your-username/neutrino-oscillation-simulator.git
+   git clone https://github.com/eli-guess/neutrino-oscillation.git
    ```
 2. Install the required packages:
    ```
