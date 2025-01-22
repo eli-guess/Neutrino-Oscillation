@@ -127,13 +127,11 @@ fig_energy.update_layout(
 
 custom_css = """
 <style>
-/* Hide the Plotly titles on mobile (screens smaller than 600px) */
+/* Adjust title_x for mobile to left-align */
 @media only screen and (max-width: 600px) {
     .plotly-graph-div .gtitle {
-        display: none !important;
-    }
-    .plotly-graph-div .gaxis-title {
-        display: none !important;
+        text-align: left !important;
+        transform: translateX(0px) !important;
     }
 }
 </style>
