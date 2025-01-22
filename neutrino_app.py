@@ -108,6 +108,7 @@ for i, E_val in enumerate(E_values):
     P_energy[i] = P_matrix[flavor_index, (flavor_index + 1) % 2]  # To next flavor
 
 # Plot Oscillation and Energy (Fixed Distance)
+
 fig_energy = go.Figure()
 fig_energy.add_trace(go.Scatter(x=E_values, y=P_energy, mode='lines', name=f"Oscillation Probability"))
 fig_energy.update_layout(
