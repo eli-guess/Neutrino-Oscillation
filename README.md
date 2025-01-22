@@ -33,7 +33,7 @@ The **Neutrino Oscillation Simulator** is a web-based application built using Py
 - Python 3.9 or later
 - Streamlit
 - NumPy
-- Matplotlib
+- Plotly
 
 ### Steps
 1. Clone this repository:
