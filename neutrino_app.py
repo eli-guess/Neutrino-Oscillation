@@ -49,6 +49,11 @@ flavors = ["Electron Neutrino", "Muon Neutrino"]
 initial_flavor = st.selectbox("Select Initial Neutrino Flavor", flavors, index=0)
 flavor_index = flavors.index(initial_flavor)
 
+if initial_flavor == "Electron Neutrino":
+    final_flavor = "Muon Neutrino"
+else:
+    final_flavor = "Electron Neutrino"
+
 E = st.slider("Neutrino Energy (GeV)", 0.1, 10.0, 1.0)
 L = st.slider("Distance Traveled (km)", 1, 10000, 500)
 theta12 = st.slider("Mixing Angle $\\theta_{12}$ (degrees)", 0.0, 45.0, 33.0)
@@ -74,7 +79,7 @@ probability_at_E_and_L = P_matrix_at_E_and_L[flavor_index, (flavor_index + 1) % 
 st.markdown(
     f"""
     <div style="text-align: center; font-size: 24px; font-weight: bold;">
-        Oscillation Probability: {probability_at_E_and_L:.4f}
+        Oscillation Probability from {intial_flavor} to {final_flavor}: {probability_at_E_and_L:.4f}
     </div>
     """,
     unsafe_allow_html = True,
